@@ -10,7 +10,7 @@ const interspeseText = (acc, currentString, variables, typeFunctions) => {
   }
   const [{ variable, expression, type }, ...rest] = variables
   const typeFunction = typeFunctions[type]
-  const variableWithFunction = typeFunction ? `${typeFunction} ${variable}` : variable
+  const variableWithFunction = typeFunction ? `${[type, typeFunction].join(".")} ${variable}` : variable
 
   const leftPart = currentString.slice(0, currentString.indexOf(expression))
   const rightPart = currentString.slice(leftPart.length + expression.length)
@@ -19,15 +19,14 @@ const interspeseText = (acc, currentString, variables, typeFunctions) => {
 }
 
 const convertExpression = (text, typeFunctions) => {
+
   const variables = [...text.matchAll(REGEX)].map(([expression, _, variable, ...rest]) => {
     const type = rest[1] || 'String'
     return { expression, variable, type }
   })
 
-  const string = interspeseText([], text, variables, typeFunctions).join(" ++ ")
-
-
-  // return `"${acc.replaceAll(expression, `" ++ ${variableWithFunction} ++ "`)}"`.replace(/ \+\+ ""$/, "")
+  const interspesedText = interspeseText([], text, variables, typeFunctions)
+  const string = interspesedText.length == 0 ? `"${text}"` : interspesedText.join(" ++ ")
 
   return {
     string,
@@ -40,6 +39,7 @@ const convert = (json) => {
     const perLanguage = Object.entries(value).reduce((acc, [language, text]) => {
       return { ...acc, [language]: convertExpression(text, json.typeFunctions) };
     }, {})
+
 
     const message = {
       languages: perLanguage,
