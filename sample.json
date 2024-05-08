@@ -1,0 +1,25 @@
+{
+  "module": "Translate",
+  "localeType": "Locale",
+  "locales": {
+    "fr": "French",
+    "en": "English"
+  },
+  "typeFunctions": {
+    "User": "fullName"
+  },
+  "texts": {
+    "grantingUser": {
+      "fr": "Bonjour {{user}}",
+      "en": "Hello {{user}}"
+    },
+    "functionWithMultipleVariable": {
+      "fr": "Bonjour {{user}}, c'est votre {{count: Int}} visites",
+      "en": "Hi {{user}}, it's your {{count: Int}} visit"
+    },
+    "greetingUserStruct": {
+      "fr": "Bonjour {{user: User}}",
+      "en": "Hi {{user: User}}"
+    }
+  }
+}

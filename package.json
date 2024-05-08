@@ -1,0 +1,15 @@
+{
+  "name": "elm-localegen",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "sample": "node index.js --input sample.json --output Translate.elm"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "nopt": "^7.2.1"
+  }
+}
